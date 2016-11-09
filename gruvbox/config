@@ -4,17 +4,20 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #11
+exec --nos-startup-id compton -f
+exec --no-startup-id conky
 exec --no-startup-id macchanger -r wlp3s0
 exec --no-startup-id macchanger -r enp0s25
 exec --no-startup-id display-visor -l
 exec --no-startup-id redshift-gtk -l 41.4:-8.53 -t 6500:2600
-exec --no-startup-id feh --bg-fill ~/Downloads/2.png
+#exec --no-startup-id feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-simplyblack-43.png
+exec --no-startup-id feh --bg-fill ~/Transferências/3.jpg
 exec --no-startup-id "setxkbmap -model nativo -layout pt"
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
+#xrandr --output VGA1 --auto --left-of LVDS1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -44,7 +47,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+j focus left
@@ -180,12 +183,11 @@ colors {
 position top    
 }
 
-#xrandr --output VGA1 --mode 1680x1050
-#xrandr --output LVDS1 --off 
+bindsym $mod+Shift+s exec --no-startup-id ~/monitor
 
-
+set $background #282828
 #set $background  #1d2021
-set $background  #32302f
+#set $background  #32302f
 set $foreground  #ebdbb2
 set $black       #282828
 set $darkgrey    #928374
@@ -206,12 +208,13 @@ set $white       #ebdbb2
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
-bindsym XF86Launch1 exec i3lock -i ~/Downloads/2.png -p default -n 
+bindsym XF86Launch1 exec i3lock-fancy 
 hide_edge_borders both
-bindsym  $mod+F1 exec chromium
-bindsym $mod+F3 exec Emacs
+bindsym $mod+F1 exec chromium
 bindsym $mod+F2 exec thunar
-bindsym $mod+F4 exec i3-sensible-terminal
+bindsym $mod+F3 exec Emacs
+bindsym $mod+F4 exec termite 
 bindsym $mod+F5 exec gnome-mplayer
 exec --no-startup-id nm-applet
 new_window 1pixel
+bindsym $mod+Shift+Escape exec shutdown -h now
