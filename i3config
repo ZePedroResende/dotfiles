@@ -4,14 +4,14 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #11
-exec --nos-startup-id compton -f
-exec --no-startup-id conky
+#exec --nos-startup-id compton -f
+#exec --no-startup-id conky
 exec --no-startup-id macchanger -r wlp3s0
-exec --no-startup-id macchanger -r enp0s25
-exec --no-startup-id display-visor -l
-exec --no-startup-id redshift-gtk -l 41.4:-8.53 -t 6500:2600
+exec --no-startup-id macchanger -r enp4s0
+#exec --no-startup-id display-visor -l
+#exec --no-startup-id redshift-gtk -l 41.4:-8.53 -t 6500:2600
 #exec --no-startup-id feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-simplyblack-43.png
-exec --no-startup-id feh --bg-fill ~/Transferências/3.jpg
+exec --no-startup-id feh --bg-fill ~/Downloads/3.jpg
 exec --no-startup-id "setxkbmap -model nativo -layout pt"
 # i3 config file (v4)
 #
@@ -50,10 +50,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ccedilla focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -74,7 +74,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -100,29 +100,28 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+0 workspace ESTUDO
-bindsym $mod+1 workspace 1: Chromium
-bindsym $mod+2 workspace 2: Terminal
-bindsym $mod+3 workspace 3: Emacs
-bindsym $mod+4 workspace 4: Music
-bindsym $mod+5 workspace 5: File Manager
-bindsym $mod+6 workspace 6: Slack
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+0 move container to workspace ESTUDO
-bindsym $mod+Shift+1 move container to workspace 1: Chromium
-bindsym $mod+Shift+2 move container to workspace 2: Terminal
-bindsym $mod+Shift+3 move container to workspace 3: Emacs
-bindsym $mod+Shift+4 move container to workspace 4: Music
-bindsym $mod+Shift+5 move container to workspace 5: File Manager
-bindsym $mod+Shift+6 move container to workspace 6: Slack
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-
+bindsym $mod+Shift+0 move container to workspace 10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -180,7 +179,7 @@ colors {
         inactive_workspace $background $background $darkgrey
         urgent_workspace   $background $background $red
     }
-position top    
+position top
 }
 
 bindsym $mod+Shift+s exec --no-startup-id ~/monitor
@@ -208,13 +207,14 @@ set $white       #ebdbb2
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
-bindsym XF86Launch1 exec i3lock-fancy 
+bindsym XF86Launch1 exec i3lock-fancy
 hide_edge_borders both
-bindsym $mod+F1 exec chromium
+bindsym $mod+F1 exec firefox-nightly
 bindsym $mod+F2 exec thunar
 bindsym $mod+F3 exec Emacs
-bindsym $mod+F4 exec termite 
+bindsym $mod+F4 exec termite
 bindsym $mod+F5 exec gnome-mplayer
+exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
 new_window 1pixel
 bindsym $mod+Shift+Escape exec shutdown -h now

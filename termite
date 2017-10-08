@@ -9,12 +9,12 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Source Code Pro for Powerline,monospace 11 
+font = Anonymice Powerline,monospace 14
 scrollback_lines = 1000
 search_wrap = true
 cursor_blink = system
 cursor_shape = block
-browser = chromium
+browser = firefox-nightly
 
 [colors]
 # hard contrast: background = #1d2021

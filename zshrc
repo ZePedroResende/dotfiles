@@ -4,7 +4,9 @@
 # Path to your oh-my-zsh installation.
  export ZSH=/home/resende/.oh-my-zsh
 
-export TERM=screen-256color-bce
+if which ruby >/dev/null && which gem >/dev/null; then
+    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -98,10 +100,6 @@ function koff(){
     xinput set-int-prop 2 "Device Enabled" 8 0
 }
 
-alias so="cd ~/uminho/2/so"
-alias poo="cd ~/uminho/2/poo"
-alias cpg="cd ~/uminho/2/cp"
-alias li="cd ~/grupo51"
 alias pt="setxkbmap pt"
 alias us="setxkbmap -layout us"
 alias aula="xbacklight -90 | amixer set -c 1 Master mute"
@@ -115,3 +113,12 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 alias vim="nvim"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
