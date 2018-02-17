@@ -1,4 +1,4 @@
-" vim-plug autoconfig if not already installed
+"sd vim-plug autoconfig if not already installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -9,53 +9,62 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Completions and snippets
+Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'jiangmiao/auto-pairs'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go' }
-Plug 'sebastianmarkow/deoplete-rust', {'for': ' rust '}
-Plug 'rust-lang/rust.vim', {'for': 'rust' }
-Plug 'timonv/vim-cargo', { 'for': 'rust' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'Quramy/tsuquyomi', {'for': 'typescript' }
+"Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+"Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go' }
+"Plug 'sebastianmarkow/deoplete-rust', {'for': ' rust '}
+Plug 'slim-template/vim-slim'
+"Plug 'rust-lang/rust.vim', {'for': 'rust' }
+"Plug 'timonv/vim-cargo', { 'for': 'rust' }
+"Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+"Plug 'Quramy/tsuquyomi', {'for': 'typescript' }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
+Plug 'tpope/vim-rails', {'for': 'ruby'}
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
+Plug 'Valloric/YouCompleteMe'
 
 " Helpers
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'haya14busa/incsearch.vim'
-Plug 'brooth/far.vim'
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/matchit.zip'
-Plug 'easymotion/vim-easymotion'
+Plug 'adimit/prolog.vim'
+"Plug 'Shougo/denite.nvim'
+"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+"Plug 'haya14busa/incsearch.vim'
+"Plug 'brooth/far.vim'
+"Plug 'tpope/vim-surround'
+"Plug 'vim-scripts/matchit.zip'
+"Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'edkolev/promptline.vim'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
-Plug 'kassio/neoterm'
-Plug 'hkupty/nvimux'
+"Plug 'edkolev/promptline.vim'
+"Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
+"Plug 'kassio/neoterm'
+"Plug 'hkupty/nvimux'
 
 " IDE
+Plug 'docunext/closetag.vim'
 Plug 'Shougo/vimfiler.vim' | Plug 'Shougo/unite.vim'
-Plug 'neomake/neomake'
-Plug 'Shougo/denite.nvim'
-Plug 'tpope/vim-fugitive'
+"Plug 'neomake/neomake'
+"Plug 'Shougo/denite.nvim'
+"Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'vim-scripts/gitignore'
 Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/indentpython.vim'
+"Plug 'vim-scripts/indentpython.vim'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'miyakogi/seiya.vim'
 
 " Syntax helpers
 Plug 'pearofducks/ansible-vim', { 'for': 'ansible' }
 Plug 'freitass/todo.txt-vim', { 'for': 'todo.txt' }
 Plug 'hashivim/vim-vagrant'
+Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'fishbullet/deoplete-ruby'
 
 call plug#end()
 
@@ -109,18 +118,6 @@ if has('conceal')
   set conceallevel=2
 endif
 
-" incsearch.vim
-let g:incsearch#auto_nohlsearch = 1
-set hlsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
 
 " TagBar
 nmap <C-t> :TagbarToggle<CR>
@@ -166,6 +163,7 @@ map <C-f> :VimFilerExplorer -winwidth=30 -toggle -no-quit -simple<CR>
 
 " fzf.vim
 nnoremap <C-p> :Files<cr>
+nnoremap <Tab> :Buffers<cr>
 
 " session management
 let g:session_autosave = 'no'
@@ -182,12 +180,12 @@ let $VISUAL = 'nvr -cc split --remote-wait'
 
 " deoplete + neosnippet + autopairs changes
 let g:AutoPairsMapCR=0
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+"let g:deoplete#auto_complete_start_length = 1
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_smart_case = 1
 imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+"imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 " quick configure to vim config
 nmap <silent> ;v :next $MYVIMRC<CR>
 nmap <silent> <BS> :nohlsearch<CR>
@@ -199,13 +197,22 @@ augroup neovim
   autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
   autocmd StdinReadPre * let s:std_in=1
   autocmd BufWritePre * %s/\s\+$//e
-  autocmd BufWritePost * Neomake
+  "autocmd BufWritePost * Neomake
   autocmd TermClose * bw!
   autocmd BufWinEnter,WinEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
   autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
 
+
+
+
+let g:cpp_class_scope_highlight = 1
+let g:ycm_confirm_extra_conf = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
 
 let g:python2_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
