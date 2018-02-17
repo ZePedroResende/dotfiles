@@ -100,6 +100,11 @@ function koff(){
     xinput set-int-prop 2 "Device Enabled" 8 0
 }
 
+function brightness(){
+    xrandr --output eDP-1 --brightness "$1"
+}
+
+
 alias pt="setxkbmap pt"
 alias us="setxkbmap -layout us"
 alias aula="xbacklight -90 | amixer set -c 1 Master mute"
@@ -113,6 +118,13 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 alias vim="nvim"
+alias network="sudo service network-manager restart"
+alias pl="cd uminho/3/2/PL/"
+alias cg="cd uminho/3/2/CG/"
+alias meio="cd uminho/3/2/MEIO/"
+alias li4="cd uminho/3/2/LI4/"
+alias cc="cd uminho/3/2/CC/"
+alias srcr="cd uminho/3/2/SRCR/"
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #eval "$(rbenv init -)"
 #export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
