@@ -10,13 +10,15 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Completions and snippets
 Plug 'hdima/python-syntax', {'for': 'python'}
+Plug 'python-mode/python-mode', {'for': 'python'}
 Plug 'jiangmiao/auto-pairs'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
+Plug 'davidhalter/jedi', {'for': 'python'}
 "Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 "Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go' }
 "Plug 'sebastianmarkow/deoplete-rust', {'for': ' rust '}
-Plug 'slim-template/vim-slim'
+Plug 'slim-template/vim-slim', {'for': 'slim'}
 "Plug 'rust-lang/rust.vim', {'for': 'rust' }
 "Plug 'timonv/vim-cargo', { 'for': 'rust' }
 "Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -25,11 +27,12 @@ Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe',{'for': ['python','cpp','c','python','clojure','go','rust','typescript','java','prolog']}
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 
 " Helpers
 Plug 'Shougo/unite.vim'
-Plug 'adimit/prolog.vim'
+Plug 'adimit/prolog.vim',{'for': 'prolog'}
 "Plug 'Shougo/denite.nvim'
 "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 "Plug 'haya14busa/incsearch.vim'
@@ -60,12 +63,17 @@ Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'miyakogi/seiya.vim'
 
 " Syntax helpers
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'Quramy/vim-js-pretty-template', {'for': ['javascript','typescript']}
+Plug 'Quramy/tsuquyomi'
 Plug 'pearofducks/ansible-vim', { 'for': 'ansible' }
 Plug 'freitass/todo.txt-vim', { 'for': 'todo.txt' }
-Plug 'hashivim/vim-vagrant'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 "Plug 'fishbullet/deoplete-ruby'
-
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-pandoc/vim-rmarkdown', {'for': 'rmarkdown'}
+Plug  'vim-pandoc/vim-pandoc', {'for': ['latex','tex','rmarkdown','markdown']}
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['latex','tex','rmarkdown','markdown']}
 call plug#end()
 
 set clipboard+=unnamedplus
@@ -124,7 +132,7 @@ nmap <C-t> :TagbarToggle<CR>
 
 " vim-airline settings
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'gruvbox'
+"let g:airline_theme = 'gruvbox'
 let g:airline_powerline_fonts = 1
 
 " themes and colors
@@ -204,15 +212,20 @@ augroup neovim
   autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-
-
-
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:cpp_class_scope_highlight = 1
 let g:ycm_confirm_extra_conf = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_concepts_highlight = 1
+let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
+let python_highlight_all = 1
 
+let g:pymode_folding = 0
+let g:pymode_python = 'python3'
+set nofoldenable
 let g:python2_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
