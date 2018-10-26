@@ -9,6 +9,8 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Completions and snippets
+Plug 'cakebaker/scss-syntax.vim'"
+Plug 'Yggdroot/indentLine'
 Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'python-mode/python-mode', {'for': 'python'}
 Plug 'jiangmiao/auto-pairs'
@@ -18,17 +20,23 @@ Plug 'davidhalter/jedi', {'for': 'python'}
 "Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 "Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go' }
 "Plug 'sebastianmarkow/deoplete-rust', {'for': ' rust '}
-Plug 'slim-template/vim-slim', {'for': 'slim'}
+Plug 'slim-template/vim-slim'
+Plug 'slashmili/alchemist.vim'
 "Plug 'rust-lang/rust.vim', {'for': 'rust' }
 "Plug 'timonv/vim-cargo', { 'for': 'rust' }
 "Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 "Plug 'Quramy/tsuquyomi', {'for': 'typescript' }
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'elixir-lang/vim-elixir'
 Plug 'Shougo/neosnippet' | Plug 'Shougo/neosnippet-snippets'
-Plug 'tpope/vim-rails', {'for': 'ruby'}
-Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-Plug 'Valloric/YouCompleteMe',{'for': ['python','cpp','c','python','clojure','go','rust','typescript','java','prolog']}
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+Plug 'vim-erlang/vim-erlang-runtime'
+Plug 'vim-erlang/vim-erlang-compiler'
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'vim-erlang/vim-erlang-tags'
+Plug 'lifepillar/vim-solarized8'
 
 " Helpers
 Plug 'Shougo/unite.vim'
@@ -48,6 +56,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'hkupty/nvimux'
 
 " IDE
+Plug 'scrooloose/nerdtree'
 Plug 'docunext/closetag.vim'
 Plug 'Shougo/vimfiler.vim' | Plug 'Shougo/unite.vim'
 "Plug 'neomake/neomake'
@@ -58,6 +67,7 @@ Plug 'vim-scripts/gitignore'
 Plug 'majutsushi/tagbar'
 "Plug 'vim-scripts/indentpython.vim'
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 "Plug 'airblade/vim-gitgutter'
 Plug 'miyakogi/seiya.vim'
@@ -132,14 +142,14 @@ nmap <C-t> :TagbarToggle<CR>
 
 " vim-airline settings
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme = 'gruvbox'
+"let g:airline_theme = 'solarized'
 let g:airline_powerline_fonts = 1
 
 " themes and colors
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set termguicolors
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme solarized8
 let g:seiya_auto_enable=1
 let g:seiya_target_groups = ['guibg']
 
@@ -170,6 +180,7 @@ call vimfiler#custom#profile('default', 'context', {
 map <C-f> :VimFilerExplorer -winwidth=30 -toggle -no-quit -simple<CR>
 
 " fzf.vim
+nmap <C-L> :NERDTree<cr>
 nnoremap <C-p> :Files<cr>
 nnoremap <Tab> :Buffers<cr>
 
@@ -212,9 +223,9 @@ augroup neovim
   autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = '/usr/local/bin/python3.7'
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3.7'
+let g:ycm_python_binary_path = '/usr/local/bin/python3.7'
 let g:cpp_class_scope_highlight = 1
 let g:ycm_confirm_extra_conf = 1
 let g:cpp_member_variable_highlight = 1
@@ -224,8 +235,11 @@ let g:cpp_concepts_highlight = 1
 let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
 let python_highlight_all = 1
 
+set cursorline
+set cursorcolumn
+set encoding=utf-8
 let g:pymode_folding = 0
 let g:pymode_python = 'python3'
 set nofoldenable
-let g:python2_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3.7'
