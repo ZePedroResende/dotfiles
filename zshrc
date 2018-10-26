@@ -2,15 +2,19 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
- export ZSH=/home/resende/.oh-my-zsh
+export ZSH="/Users/silenzio/.oh-my-zsh"
 
-if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="smt"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -44,7 +48,10 @@ ZSH_THEME="smt"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -54,9 +61,11 @@ ZSH_THEME="smt"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(git)
+plugins=(
+  git
+  zsh-syntax-highlighting
+)
 
-plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -87,30 +96,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-function open () {
-    xdg-open "$*" &
-}
-
-function kon(){
-    xinput set-int-prop 2 "Device Enabled" 8 1
-}
-
-function koff(){
-    xinput set-int-prop 2 "Device Enabled" 8 0
-}
-
-function brightness(){
-    xrandr --output eDP-1 --brightness "$1"
-}
-
-
-alias pt="setxkbmap pt"
-alias us="setxkbmap -layout us"
-alias aula="xbacklight -90 | amixer set -c 1 Master mute"
-alias casa="xbacklight +100 |amixer set -c 1 Master unmute | amixer set -c 1 Headphone umute | amixer set -c 1 Speaker unmute"
-alias p="amixer set -c 1 Speaker mute"
-alias np="amixer set -c 1 Speaker unmute"
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias tn='tmux new-session -s'
@@ -118,19 +103,25 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 alias vim="nvim"
-alias network="sudo service network-manager restart"
-alias pl="cd uminho/3/2/PL/"
-alias cg="cd uminho/3/2/CG/"
-alias meio="cd uminho/3/2/MEIO/"
-alias li4="cd uminho/3/2/LI4/"
-alias cc="cd uminho/3/2/CC/"
-alias srcr="cd uminho/3/2/SRCR/"
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-#export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+alias droid="emulator -avd Nexus_5X_API_28 </dev/null &>/dev/null &"
+alias msc="cd ~/dev/msc"
+alias sdb="cd ~/dev/msc/SDB"
+alias pcp="cd ~/dev/msc/CPD/PCP"
+alias aa="cd ~/dev/msc/CPD/AA"
+alias psd="cd ~/dev/msc/SD/PSD"
+alias fsd="cd ~/dev/msc/SD/FSD"
+alias spln="cd ~/dev/msc/spln"
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export EDITOR=nvim
+export ANDROID_HOME=/Users/$(whoami)/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
