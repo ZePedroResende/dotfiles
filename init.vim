@@ -12,11 +12,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " syntax
 Plug 'cakebaker/scss-syntax.vim'"
 Plug 'slim-template/vim-slim'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
+Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 
 " helpers
 Plug 'Yggdroot/indentLine'
@@ -42,6 +45,8 @@ Plug 'vim-erlang/vim-erlang-runtime'
 Plug 'vim-erlang/vim-erlang-compiler'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'vim-erlang/vim-erlang-tags'
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 """""""
@@ -83,19 +88,19 @@ let mapleader = "\<Space>"
 set wildignore+=.git,*.swp,*pyc,*pyo,*.png,*.jpg,*.gif,*.ai,*.jpeg,*.psd,*.jar,*.zip,*.gem,log/**,tmp/**,coverage/**,rdoc/**,output_*,*.xpi,doc/**
 
 " python special settings
-au BufNewFile,BufRead *.py set
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+au BufNewFile,BufRead *.py 
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
 
 au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 
 
 :set cmdheight=1
 
@@ -135,6 +140,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 """ deoplete
 set runtimepath+=~/.local/shared/nvim/plugged/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
+
+""" airline
+let g:airline#extensions#tabline#enabled = 1
 
 "" ruby"
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
