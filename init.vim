@@ -11,6 +11,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " looks 
 Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -20,6 +21,7 @@ Plug 'cakebaker/scss-syntax.vim'"
 Plug 'slim-template/vim-slim'
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 " helpers
 Plug 'Yggdroot/indentLine'
@@ -46,13 +48,16 @@ Plug 'vim-erlang/vim-erlang-compiler'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'vim-erlang/vim-erlang-tags'
 
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 call plug#end()
 
 """""""
-
-
-
 set clipboard+=unnamedplus
 set completeopt-=preview
 set noshowmode
@@ -108,16 +113,12 @@ au BufNewFile,BufRead *.js, *.html, *.css
 syntax on
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set termguicolors
-set background=light
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
-colorscheme solarized8
-"let g:seiya_auto_enable=1
-"let g:seiya_target_groups = ['guibg']
+set background=dark
+colorscheme gruvbox
 "
 """ setup pyhton in nvim
-let g:python_host_prog = '/usr/local/bin/python2.7'
-let g:python3_host_prog = '/usr/local/bin/python3.7'
+let g:python_host_prog = '/bin/python2'
+let g:python3_host_prog = '/bin/python3'
 
 " NERDTREE
 nmap <C-L> :NERDTreeToggle<cr>
@@ -155,3 +156,12 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
+""" rust
+let g:rustfmt_autosave = 1
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ }
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
