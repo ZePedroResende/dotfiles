@@ -1,14 +1,14 @@
 "sd vim-plug autoconfig if not already installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | nested source $MYVIMRC
 endif
 
 " startup for vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
-" looks 
+" looks
 Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
@@ -25,6 +25,7 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
 Plug 'neovimhaskell/haskell-vim', {'for': ['haskell']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'rhysd/vim-clang-format', {'for': ['cpp', 'c']}
+Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 
 " helpers
 Plug 'Yggdroot/indentLine'
@@ -32,8 +33,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'rhysd/vim-grammarous'
 
-" Hardeners 
+" Hardeners
 Plug 'takac/vim-hardtime'
 
 
@@ -43,9 +45,9 @@ Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim', { 'for': ['rust','ruby','python', 'elixir', 'javascript'], 'do': ':UpdateRemotePlugins' }
-Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'c']} 
-Plug 'SirVer/ultisnips' 
+Plug 'Shougo/deoplete.nvim', { 'for': ['rust','ruby','python', 'elixir', 'javascript', 'sass', 'css', 'scsss'], 'do': ':UpdateRemotePlugins' }
+Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'c']}
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 
@@ -67,11 +69,14 @@ Plug 'vim-erlang/vim-erlang-tags'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'luochen1990/rainbow'
+Plug 'jparise/vim-graphql'
 
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
 
 Plug 'lervag/vimtex'
 Plug 'lionawurscht/deoplete-biblatex'
@@ -95,7 +100,7 @@ set noerrorbells
 set expandtab
 set updatetime=250
 
-set tabstop=2 
+set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
@@ -120,19 +125,19 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " python special settings
 let g:pymode_python = 'python3'
-au BufNewFile,BufRead *.py 
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
+au BufNewFile,BufRead *.py
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4 |
+      \ set textwidth=79 |
+      \ set expandtab |
+      \ set autoindent |
+      \ set fileformat=unix |
 
 au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 
+      \ set tabstop=2 |
+      \ set softtabstop=2 |
+      \ set shiftwidth=2
 
 set cmdheight=1
 
@@ -188,7 +193,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 "" ruby"
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 "autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
@@ -202,43 +207,50 @@ let g:cpp_concepts_highlight = 1
 let g:rustfmt_autosave = 1
 set hidden
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'go': ['go-langserver'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'ruby': ['tcp://localhost:7658']
-    \ }
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+      \ 'javascript': ['~/.asdf/shims/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+      \ 'ruby': ['~/.asdf/shims/solargraph', 'stdio'],
+      \ 'typescript': ['~/.asdf/shims/javascript-typescript-stdio'],
+      \ }
+nnoremap <leader> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <Leader> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 """ale
 let g:ale_cpp_clang_options = '-std=c++17 -Wall -stdlib=libc++'
 let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++17 -x c++'
 let g:ale_linters = {
-\   'cpp': ['clangtidy','clang-format', 'cppcheck', 'g++','clangd'],
-\   'latex' : ['texlab'],
-\   'elixir' : ['credo', 'mix'],
-\   'ruby' : ['sorbet'],
-\ 'javascript': ['eslint'],
-\ 'jsx': ['eslint'],
-\}
+      \ 'cpp': ['clangtidy','clang-format', 'cppcheck', 'g++','clangd'],
+      \ 'latex' : ['texlab'],
+      \ 'elixir' : ['credo', 'mix'],
+      \ 'ruby' : ['rubocop','rails_best_practices','brakeman','sorbet'],
+      \ 'javascript': ['eslint'],
+      \ 'jsx': ['eslint'],
+      \ 'sass': ['stylelint'],
+      \ 'scss': ['stylelint'],
+      \ 'css': ['stylelint'],
+      \}
 let g:ale_fix_on_save = 1
-
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
 "let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --prose-wrap always'
 let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_fixers = {
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'markdown': ['prettier'],
       \   'javascript': ['prettier'],
       \   'typescript': ['prettier'],
       \   'javascript.jsx': ['prettier'],
       \   'elixir': ['mix_format'],
-      \   'css': ['stylelint'],
+      \   'sass': ['stylelint'],
       \   'scss': ['stylelint'],
+      \   'css': ['stylelint'],
       \   'terraform': ['DoTfFMT'],
-      \   'ruby': ['rubocop'],
-\}
+      \   'ruby': ['rubocop','sorbet'],
+      \}
 
 let g:clang_format#auto_format=1
 
@@ -253,7 +265,7 @@ let g:tex_flavor = "latex"
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_quickfix_mode = 2
 if has('nvim')
-    let g:vimtex_compiler_progname = 'nvr'
+  let g:vimtex_compiler_progname = 'nvr'
 endif
 
 " One of the neosnippet plugins will conceal symbols in LaTeX which is
@@ -264,26 +276,33 @@ let g:tex_conceal = ""
 " Quickfix with Neovim is broken or something
 " https://github.com/lervag/vimtex/issues/773
 let g:vimtex_quickfix_latexlog = {
-            \ 'default' : 1,
-            \ 'fix_paths' : 0,
-            \ 'general' : 1,
-            \ 'references' : 1,
-            \ 'overfull' : 1,
-            \ 'underfull' : 1,
-            \ 'font' : 1,
-            \ 'packages' : {
-            \   'default' : 1,
-            \   'natbib' : 1,
-            \   'biblatex' : 1,
-            \   'babel' : 1,
-            \   'hyperref' : 1,
-            \   'scrreprt' : 1,
-            \   'fixltx2e' : 1,
-            \   'titlesec' : 1,
-            \ },
-\}
+      \ 'default' : 1,
+      \ 'fix_paths' : 0,
+      \ 'general' : 1,
+      \ 'references' : 1,
+      \ 'overfull' : 1,
+      \ 'underfull' : 1,
+      \ 'font' : 1,
+      \ 'packages' : {
+      \   'default' : 1,
+      \   'natbib' : 1,
+      \   'biblatex' : 1,
+      \   'babel' : 1,
+      \   'hyperref' : 1,
+      \   'scrreprt' : 1,
+      \   'fixltx2e' : 1,
+      \   'titlesec' : 1,
+      \ },
+      \}
 
 "hardtime
-let g:hardtime_default_on = 1
-let g:hardtime_timeout = 2000
+let g:hardtime_default_on = 0
+let g:hardtime_timeout = 1000
 cnoremap kj <C-C>
+
+"Rainbow
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+"Typescript
+let g:typescript_indent_disable = 1
+let g:typescript_opfirst='\%([<>=,?^%|*/&]\|\([-:+]\)\1\@!\|!=\|in\%(stanceof\)\=\>\)'
