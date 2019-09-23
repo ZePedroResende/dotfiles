@@ -184,7 +184,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-n>"
 let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 """ deoplete
-set runtimepath+=~/.local/shared/nvim/plugged/deoplete.nvim/
+set runtimepath+=~/.local/share/nvim/plugged/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
